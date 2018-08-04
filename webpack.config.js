@@ -6,23 +6,20 @@ const port = process.env.PORT || 3000;
 module.exports = {
   mode: 'development',
   entry: {
+    vendor: ['semantic-ui-react'],
     app: './src/index.js'
   },
   output: {
-    filename: '[name].[hash].js',
-    publicPath: '/'
+    filename: '[name].[hash].js'
   },
   devtool: 'inline-source-map',
   module: {
     rules: [
-      // First Rule
       {
         test: /\.(js)$/,
         exclude: /node_modules/,
         use: ['babel-loader']
       },
-
-      // Second Rule
       {
         test: /\.css$/,
         use: [
@@ -32,7 +29,7 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules:true,
+              modules: true,
               camelCase: true,
               sourceMap: true
             }
@@ -41,12 +38,24 @@ module.exports = {
       }
     ]
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          test: 'vendor',
+          name: 'vendor',
+          enforce: true
+        }
+      }
+    }
+  },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
       favicon: 'public/favicon.ico'
-    }),
-    new webpack.HotModuleReplacementPlugin(),
+    })
   ],
   devServer: {
     host: 'localhost',
@@ -55,4 +64,4 @@ module.exports = {
     open: true,
     hot: true
   }
-}
+};
