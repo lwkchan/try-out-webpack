@@ -14,9 +14,9 @@
     "semantic-ui-react": "^0.82.1"
   },
   "scripts": {
-    "dev": "webpack-dev-server --hot --config webpack.config.development.js",
+    "dev": "webpack-dev-server --env.env=dev",
     "prebuild": "rimraf dist",
-    "build": "cross-env NODE_ENV=production webpack -p --config webpack.config.production.js"
+    "build": "cross-env NODE_ENV=production webpack -p --env.env=prod"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -24,6 +24,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
+    "chalk": "^2.4.1",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
     "eslint": "^5.2.0",
@@ -35,6 +36,7 @@
     "style-loader": "^0.21.0",
     "webpack": "^4.16.3",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5"
+    "webpack-dev-server": "^3.1.5",
+    "webpack-merge": "^4.1.4"
   }
 }
